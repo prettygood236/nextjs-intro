@@ -94,8 +94,8 @@ export default function Home({ results }) {
 }
 
 /*
-! NextJS : Static Pre Rendering -> Hydration
-* 서버에서 미리 컴포넌트들을 랜더링해서 html을 만들어 던져주고(Static Pre Rendering), 
+! NextJS : Static Site Generation -> Hydration
+* 서버에서 미리 컴포넌트들을 랜더링해서 html을 만들어 던져주고(Static Site Generation), 
 - (=> 자바스크립트가 비활성이어도 적어도 흰 화면없이 정적인 html은 볼 수 있고,
 -     따라서 SEO(검색 엔진 최적화)에도 유저에게도 좋다!)
 * 클라이언트에서 자바스크립트, react로딩이 끝나면 일반적인 react 앱처럼 동작((Re)Hydration,수분보충,react로 동적상태로 변화)한다! 
