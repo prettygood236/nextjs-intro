@@ -93,16 +93,7 @@ export default function Home({ results }) {
   );
 }
 
-/*
-! NextJS : Static Site Generation -> Hydration
-* 서버에서 미리 컴포넌트들을 랜더링해서 html을 만들어 던져주고(Static Site Generation), 
-- (=> 자바스크립트가 비활성이어도 적어도 흰 화면없이 정적인 html은 볼 수 있고,
--     따라서 SEO(검색 엔진 최적화)에도 유저에게도 좋다!)
-* 클라이언트에서 자바스크립트, react로딩이 끝나면 일반적인 react 앱처럼 동작((Re)Hydration,수분보충,react로 동적상태로 변화)한다! 
-*/
-
-/*
-위의 방식으로 Loading을 유저에게 보여주기 싫고 fetch등 data관련 작업을 모두 server에서 한 다음 
+/* Loading을 유저에게 보여주기 싫고 fetch등 data관련 작업을 모두 server에서 한 다음 
 - API가 모두 완료되었을 때(데이터가 모두 들어왔을 때) 페이지를 랜더할 수도 있다. (API가 돌아오기 전까지 화면에 아무것도 안보인다.)
 * getServerSideProps : (오직) server-side에서(만) 실행하여 _app의 pageProps로 넘겨준다! 
 홈 페이지는 이제 완전한 server-side rendering page가 되었다.
@@ -114,3 +105,29 @@ export async function getServerSideProps() {
   ).json();
   return { props: { results } };
 }
+
+/*
+! NextJS : Pre-rendering -> Hydration
+* 서버에서 미리 컴포넌트들을 랜더링해서 html을 만들어 던져주고
+- (=> 자바스크립트가 비활성이어도 적어도 흰 화면없이 정적인 html은 볼 수 있고,
+-     따라서 SEO(검색 엔진 최적화)에도 유저에게도 좋다!)
+* 클라이언트에서 자바스크립트, react로딩이 끝나면 일반적인 react 앱처럼 interactive한 동작((Re)Hydration,수분보충,react로 동적상태로 변화)이 가능해 진다! 
+
+! Next.js has two forms of pre-rendering
+The difference is in when it generates the HTML for a page.
+* (Recommended) Static-site Generation(SSG) : getStaticProps (and getStaticPaths if necessary)
+- The HTML is generated at build time and will be reused on each request.  
+- It can be cached by a CDN.
+* Server-side Rendering(SSR) : getServerSideProps
+- The HTML is generated on each request.
+
+! Incremental Static Regeneration (ISR)   
+- Next.js allows you to create or update static pages after you’ve built your site. 
+- ISR enables you to use static-generation on a per-page basis, without needing to rebuild the entire site.
+- With ISR, You can retain the benefits of static while scaling to millions of pages.
+
+
+
+
+
+*/
